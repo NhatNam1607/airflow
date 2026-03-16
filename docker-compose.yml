@@ -41,8 +41,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: >
-      bash -c "airflow db migrate && airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password ${AIRFLOW_PASSWORD:-admin} || true"
+    command: bash -c "airflow db migrate"
 
   webserver:
     <<: *airflow-common
