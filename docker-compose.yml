@@ -10,10 +10,8 @@ x-airflow-common:
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__SIMPLE_AUTH_MANAGER__PASSWORD: ${AIRFLOW__SIMPLE_AUTH_MANAGER__PASSWORD:-admin}
   volumes:
-    - ${PWD}/dags:/opt/airflow/dags:z
-    - ${PWD}/logs:/opt/airflow/logs:z
-    - ${PWD}/plugins:/opt/airflow/plugins:z
-    - ${PWD}/config:/opt/airflow/config:z
+    - logs:/opt/airflow/logs
+  # DAGs, Plugins, Config đã được bundle vào Image qua Dockerfile (Best Practice for Production)
   logging:
     options:
       max-size: 10m
@@ -78,3 +76,4 @@ services:
 
 volumes:
   postgres-data: {}
+  logs: {}
