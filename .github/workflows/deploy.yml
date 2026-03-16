@@ -19,8 +19,9 @@ jobs:
       - name: Validation DAGs (Syntax check)
         run: |
           python -m compileall dags/
-          # Lệnh này sẽ giả lập việc load DAG để tìm lỗi import
+          # Khởi tạo database tạm thời để Airflow 3 có thể kiểm tra lỗi
           export AIRFLOW__CORE__LOAD_EXAMPLES=False
+          airflow db migrate
           airflow dags list-import-errors
 
   deploy:
